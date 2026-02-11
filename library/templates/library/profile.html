@@ -1,0 +1,92 @@
+{% extends 'library/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid py-5" style="background: linear-gradient(to bottom, #006400 250px, #f8f9fa 250px);">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card shadow-lg border-0" style="border-radius: 20px; overflow: hidden;">
+                    <div class="row g-0">
+                        <div class="col-md-4 text-center p-5" style="background: #fdfcf0; border-right: 1px solid #e9e7da;">
+                            <div class="mb-4">
+                                {% if user.profile.avatar %}
+                                    <img src="{{ user.profile.avatar.url }}" alt="Avatar" class="rounded-circle shadow" style="width: 160px; height: 160px; object-fit: cover; border: 5px solid white;">
+                                {% else %}
+                                    <div class="rounded-circle shadow bg-secondary d-flex align-items-center justify-content-center text-white mx-auto" style="width: 160px; height: 160px; font-size: 4rem;">
+                                        {{ user.username|first|upper }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <h2 class="fw-bold mb-1">{{ user.username }}</h2>
+                            <p class="text-muted small">Постоянный читатель</p>
+                        </div>
+
+                        <div class="col-md-8 p-5 bg-white">
+                            <h4 class="fw-bold mb-4" style="color: #006400;">Настройки профиля</h4>
+                            
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label small fw-bold text-muted">ЛОГИН</label>
+                                        <input type="text" class="form-control bg-light" value="{{ user.username }}" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label small fw-bold text-muted">EMAIL</label>
+                                        {{ u_form.email }}
+                                    </div>
+                                    <div class="col-12 mt-4">
+                                        <label class="form-label small fw-bold text-muted">ЗАГРУЗИТЬ НОВОЕ ФОТО</label>
+                                        <div class="p-3 border rounded-3 bg-light">
+                                            {{ p_form.avatar }}
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-2">
+                                        <label class="form-label small fw-bold text-muted">О СЕБЕ</label>
+                                        {{ p_form.bio }}
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-success mt-4 px-5 py-2 rounded-pill shadow" style="background-color: #006400;">Сохранить изменения</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-10">
+                <h3 class="fw-bold mb-4" style="font-family: 'Playfair Display', serif;">Моя полка</h3>
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    {% for book in user.profile.favorite_books.all %}
+                    <div class="col">
+                        <div class="card h-100 border-0 shadow-sm p-3" style="border-radius: 15px;">
+                            <div class="d-flex align-items-center">
+                                {% if book.cover %}
+                                    <img src="{{ book.cover.url }}" alt="Cover" style="width: 60px; height: 80px; object-fit: cover; border-radius: 5px;" class="me-3">
+                                {% endif %}
+                                <div class="overflow-hidden">
+                                    <h6 class="mb-0 text-truncate fw-bold">{{ book.title }}</h6>
+                                    <p class="small text-muted mb-0 text-truncate">{{ book.author }}</p>
+                                    <a href="{% url 'book_detail' book.id %}" class="btn btn-sm btn-link text-success p-0 fw-bold" style="font-size: 11px; text-decoration: none;">Читать →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-12 text-center py-4 bg-white rounded-3">
+                        <p class="text-muted mb-0">Полка пуста. Самое время что-нибудь почитать!</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-control { border-radius: 8px; border: 1px solid #dee2e6; padding: 10px; }
+    textarea { height: 80px; width: 100%; border-radius: 8px; border: 1px solid #dee2e6; padding: 10px; }
+</style>
+{% endblock %}

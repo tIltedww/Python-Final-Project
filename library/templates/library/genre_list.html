@@ -1,0 +1,38 @@
+{% extends 'library/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold" style="color: #006400;">Литературные залы</h1>
+        <p class="lead text-muted">Выберите интересующее вас направление</p>
+    </div>
+
+    <div class="row">
+        {% for genre in genres %}
+        <div class="col-md-4 mb-4">
+            <a href="{% url 'books_by_genre' genre.id %}" class="text-decoration-none text-dark">
+                <div class="card h-100 shadow-sm border-0 genre-card" style="transition: 0.3s; border-radius: 15px;">
+                    <div class="card-body text-center py-5" style="background: #fdfcf0; border-radius: 15px; border-bottom: 5px solid #c5a059;">
+                        <div class="display-6 mb-3">📚</div>
+                        <h3 class="fw-bold">{{ genre.name }}</h3>
+                        <p class="text-muted small mb-0">Перейти к книгам</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-5">
+            <p class="text-muted">Жанры пока не созданы. Добавьте их в админ-панели.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    /* Эффект всплытия карточки при наведении */
+    .genre-card:hover { 
+        transform: translateY(-10px); 
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important; 
+    }
+</style>
+{% endblock %}

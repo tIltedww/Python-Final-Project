@@ -1,0 +1,40 @@
+{% extends 'library/base.html' %}
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="row bg-white shadow-lg rounded-4 overflow-hidden" style="border: 1px solid #dee2e6;">
+        <div class="col-md-5 p-0 bg-light d-flex align-items-center justify-content-center">
+            {% if book.cover %}
+                <img src="{{ book.cover.url }}" class="img-fluid w-100" style="max-height: 600px; object-fit: contain; background: #eee;">
+            {% else %}
+                <div class="py-5 text-center text-muted">Нет обложки</div>
+            {% endif %}
+        </div>
+
+        <div class="col-md-7 p-5">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+                <span class="badge" style="background: #c5a059;">{{ book.genre.name }}</span>
+                <span class="text-warning fw-bold">⭐ {{ book.rating }}/5.0</span>
+            </div>
+            
+            <h1 class="display-5 fw-bold mb-2" style="color: #006400;">{{ book.title }}</h1>
+            <h4 class="text-secondary italic mb-4">Автор: {{ book.author }}</h4>
+            
+            <hr>
+            
+            <h5 class="fw-bold mt-4">Аннотация:</h5>
+            <p class="text-dark mt-2" style="line-height: 1.8; font-size: 1.1rem; text-align: justify;">
+                {{ book.description|default:"Описание для этой книги еще не добавлено. Но мы уверены, что она достойна вашего внимания!" }}
+            </p>
+
+            <div class="mt-5 d-flex gap-2">
+                <a href="{% url 'add_to_favorites' book.id %}" class="btn btn-success btn-lg px-4" style="background: #006400; border: none;">
+                    ❤️ В избранное
+                </a>
+                <a href="javascript:history.back()" class="btn btn-outline-secondary btn-lg px-4">
+                    Назад
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends 'library/base.html' %}
+
+{% block content %}
+<div class="hero-section text-center text-white d-flex align-items-center justify-content-center" 
+     style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); 
+            height: 60vh; background-size: cover; background-position: center; margin-top: -20px;">
+    <div class="container">
+        <h1 class="display-3 fw-bold mb-3" style="font-family: 'Playfair Display', serif;">Электронный каталог</h1>
+        <p class="lead mb-4">Доступ к мировым научным и литературным ценностям</p>
+        
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form action="{% url 'all_books_search' %}" method="get" class="p-2 bg-white rounded-pill shadow-lg d-flex">
+                    <input type="text" name="q" class="form-control border-0 rounded-pill ps-4" placeholder="Поиск по книгам, авторам, ключевым словам...">
+                    <button type="submit" class="btn btn-success rounded-pill px-5 fw-bold" style="background-color: #006400;">ПОИСК</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5 py-5">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <h2 class="display-5 fw-bold mb-4" style="color: #006400; font-family: 'Playfair Display', serif;">Добро пожаловать в цифровую эру знаний</h2>
+            <p class="text-muted fs-5">Наш академический репозиторий предоставляет мгновенный доступ к редким изданиям, современной классике и научной фантастике. Мы собрали более 9 шедевров мировой литературы специально для вашего удобства.</p>
+            <a href="{% url 'genre_list' %}" class="btn btn-outline-success btn-lg mt-3">Перейти в залы</a>
+        </div>
+        <div class="col-md-6 d-none d-md-block">
+            <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Books" class="img-fluid rounded-3 shadow-lg">
+        </div>
+    </div>
+</div>
+
+<div class="py-5" style="background-color: #fdfcf0; border-top: 1px solid #e9e7da; border-bottom: 1px solid #e9e7da;">
+    <div class="container">
+        <div class="row text-center g-4">
+            <div class="col-md-4">
+                <div class="p-4">
+                    <div class="display-4 text-success mb-3">🏛</div>
+                    <h4 class="fw-bold">Доступность</h4>
+                    <p class="text-muted small">Читайте из любой точки мира 24/7</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-4 border-start border-end">
+                    <div class="display-4 text-success mb-3">📜</div>
+                    <h4 class="fw-bold">Качество</h4>
+                    <p class="text-muted small">Лучшие издания и проверенные тексты</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-4">
+                    <div class="display-4 text-success mb-3">🔖</div>
+                    <h4 class="fw-bold">Избранное</h4>
+                    <p class="text-muted small">Сохраняйте книги в личный кабинет</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5 text-center">
+    <h3 class="fw-bold mb-5" style="font-family: 'Playfair Display', serif;">Популярные литературные залы</h3>
+    <div class="row justify-content-center">
+        <div class="col-md-3">
+            <a href="{% url 'genre_list' %}" class="text-decoration-none text-dark">
+                <div class="p-4 border rounded shadow-sm bg-white hover-up">
+                    <span class="fs-1">🚀</span>
+                    <h5 class="mt-2">Научпоп</h5>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="{% url 'genre_list' %}" class="text-decoration-none text-dark">
+                <div class="p-4 border rounded shadow-sm bg-white hover-up">
+                    <span class="fs-1">🏰</span>
+                    <h5 class="mt-2">Фэнтези</h5>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .hover-up:hover { transform: translateY(-5px); transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important; }
+</style>
+{% endblock %}

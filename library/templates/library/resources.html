@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="background: #f4f1ea;">
+    <div class="container py-5 text-center">
+        <h1 class="display-4">Академические ресурсы</h1>
+        <p class="lead">Здесь собраны внешние базы данных и архивы.</p>
+        <div class="row g-4 mt-4">
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0" style="border-top: 4px solid #006400 !important;">
+                    <div class="card-body">
+                        <h3>Scopus</h3>
+                        <p>Крупнейшая единая база данных цитирований и аннотаций.</p>
+                        <a href="https://www.scopus.com" class="btn btn-success">Перейти</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0" style="border-top: 4px solid #c5a059 !important;">
+                    <div class="card-body">
+                        <h3>eLibrary</h3>
+                        <p>Научная электронная библиотека для исследователей.</p>
+                        <a href="https://elibrary.ru" class="btn btn-warning text-white">Перейти</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="{% url 'home' %}" class="btn btn-link mt-5">Вернуться на главную</a>
+    </div>
+</body>
+</html>
